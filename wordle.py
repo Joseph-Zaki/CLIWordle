@@ -15,18 +15,21 @@ def getWord():
         return getWord()
     return input_word
 
+def win():
+    print("You won in " + str(6-guesses) + " guesses!")
 """
 TODO:
-1. compareWord should check if the correct word was guest
-2. incorporate game structure in the form of a "main" function?
+1. incorporate game structure in the form of a "main" function?
 """
 def compareWord(guessWord, target):
     coloredString = ""
     count = 0
+    if guessWord == target:
+        win()
+        return colored(guessWord, "white", "on_green")
     for char in guessWord:
         if char in target:
             index = guessWord.find(char, count)
-            #print("count: " + str(count) + " targetIndex: " + str(target.find(char, count))+ "index: " + str(index))
             if index == target.find(char, count):
                 coloredString = coloredString + colored(char, "white", "on_green")
                 count+=1
