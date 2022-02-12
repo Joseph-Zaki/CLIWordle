@@ -9,12 +9,17 @@ def getWord():
     input_word = input("Enter a word: ")
     if len(input_word) != 5: 
         print("You word must be 5 letters")
-        getWord()
-    if not input_word.isalpha():
+        return getWord()
+    elif not input_word.isalpha():
         print("Letters only! No Spaces!")
-        getWord()
+        return getWord()
     return input_word
 
+"""
+TODO:
+1. compareWord should check if the correct word was guest
+2. incorporate game structure in the form of a "main" function?
+"""
 def compareWord(guessWord, target):
     coloredString = ""
     count = 0
@@ -32,12 +37,10 @@ def compareWord(guessWord, target):
         count+=1
     return coloredString
             
-
-
 def guess():
     print(str(guesses) + " guesses remaining.")
     currWord = getWord()
     print(compareWord(currWord, targetWord))
 
 
-print(compareWord("poiny", "point"))
+guess()
