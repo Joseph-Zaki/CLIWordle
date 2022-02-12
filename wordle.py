@@ -1,4 +1,4 @@
-from colorama import Fore, Back, Style, init
+from colorama import init
 from termcolor import colored, cprint
 init()
 targetWord = "point"
@@ -17,15 +17,19 @@ def getWord():
 
 def compareWord(guessWord, target):
     coloredString = ""
+    count = 0
     for char in guessWord:
         if char in target:
-            index = guessWord.find(char)
-            if index == target.find(char):
+            index = guessWord.find(char, count)
+            #print("count: " + str(count) + " targetIndex: " + str(target.find(char, count))+ "index: " + str(index))
+            if index == target.find(char, count):
                 coloredString = coloredString + colored(char, "white", "on_green")
+                count+=1
                 continue
             coloredString = coloredString + colored(char, "white", "on_yellow")
         else:
             coloredString = coloredString + colored(char, "white", "on_grey")
+        count+=1
     return coloredString
             
 
@@ -36,4 +40,4 @@ def guess():
     print(compareWord(currWord, targetWord))
 
 
-print(compareWord("nrenn", "point"))
+print(compareWord("poiny", "point"))
