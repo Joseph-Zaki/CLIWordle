@@ -1,5 +1,4 @@
 from colorama import init
-from pkg_resources import WorkingSet
 from termcolor import colored, cprint
 import random
 import csv
@@ -49,10 +48,13 @@ def selectWord():
     global targetWord
     with open("words.csv") as words:
         reader = csv.reader(words)
-        #choices = words.read().split(',')
-        choices = list(reader)
-        targetWord = random.choice(choices)
-    print(choices)
+        chosen = random.choice(list(reader))
+        targetWord = chosen[0]
+        # reader = csv.reader(words)
+        # print(random.choice(list(reader)))
+        # choices = words.read()
+        # targetWord = random.choice(choices)
+    print("Your word is: " + targetWord)
         
 
 def main():
@@ -68,4 +70,4 @@ def main():
         print("word was " + targetWord)
 
 
-selectWord()
+main()
