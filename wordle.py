@@ -1,8 +1,10 @@
 from colorama import init
+from pkg_resources import WorkingSet
 from termcolor import colored, cprint
+import random
+import csv
 init()
-targetWord = "point"
-targetarr = list(targetWord)
+targetWord = ""
 guesses = 6
 won = False
 
@@ -43,7 +45,18 @@ def guess():
     guesses = guesses - 1
     print(compareWord(currWord, targetWord))
 
+def selectWord():
+    global targetWord
+    with open("words.csv") as words:
+        reader = csv.reader(words)
+        #choices = words.read().split(',')
+        choices = list(reader)
+        targetWord = random.choice(choices)
+    print(choices)
+        
+
 def main():
+    selectWord()
     print("Welcome to CLI Wordle!")
     while not won and guesses > 0:
         guess()
@@ -52,5 +65,7 @@ def main():
         return
     else:
         print("You lost!")
+        print("word was " + targetWord)
 
-main()
+
+selectWord()
