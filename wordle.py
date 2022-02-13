@@ -16,10 +16,6 @@ def getWord():
         return getWord()
     return input_word
 
-"""
-TODO:
-1. incorporate game structure in the form of a "main" function?
-"""
 def compareWord(guessWord, target):
     coloredString = ""
     count = 0
