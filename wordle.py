@@ -4,6 +4,7 @@ init()
 targetWord = "point"
 targetarr = list(targetWord)
 guesses = 6
+won = False
 
 def getWord():
     input_word = input("Enter a word: ")
@@ -56,4 +57,4 @@ def main():
     else:
         print("You lost!")
 
-guess()
+main()
