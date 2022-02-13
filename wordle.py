@@ -7,9 +7,17 @@ targetWord = ""
 guesses = 6
 won = False
 
+def stageVars():
+    global targetWord
+    global guesses
+    global won
+    targetWord = ""
+    guesses = 6
+    won = False
+
 def getWord():
     input_word = input("Enter a word: ")
-    if len(input_word) != 5: 
+    if len(input_word) != 5:
         print("You word must be 5 letters")
         return getWord()
     elif not input_word.isalpha():
@@ -36,7 +44,7 @@ def compareWord(guessWord, target):
             coloredString = coloredString + colored(char, "white", "on_grey")
         count+=1
     return coloredString
-            
+
 def guess():
     global guesses
     print(str(guesses) + " guesses remaining.")
@@ -50,24 +58,31 @@ def selectWord():
         reader = csv.reader(words)
         chosen = random.choice(list(reader))
         targetWord = chosen[0]
-        # reader = csv.reader(words)
-        # print(random.choice(list(reader)))
-        # choices = words.read()
-        # targetWord = random.choice(choices)
-    print("Your word is: " + targetWord)
-        
+
+def replay():
+    playAgain = input("Play Again? (y/n): ")
+    if playAgain.lower() == "y":
+        return True
+    elif playAgain.lower() == "n":
+        return False
+    else:
+        replay()
 
 def main():
+    stageVars()
     selectWord()
     print("Welcome to CLI Wordle!")
     while not won and guesses > 0:
         guess()
     if won:
         print("You won in " + str(6-guesses) + " guess(es)!")
-        return
+        if replay():
+            main()
     else:
         print("You lost!")
         print("word was " + targetWord)
+        if replay():
+            main()
 
 
 main()
