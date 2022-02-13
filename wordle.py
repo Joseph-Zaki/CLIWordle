@@ -15,8 +15,6 @@ def getWord():
         return getWord()
     return input_word
 
-def win():
-    print("You won in " + str(6-guesses) + " guesses!")
 """
 TODO:
 1. incorporate game structure in the form of a "main" function?
@@ -24,8 +22,9 @@ TODO:
 def compareWord(guessWord, target):
     coloredString = ""
     count = 0
+    global won
     if guessWord == target:
-        win()
+        won = True
         return colored(guessWord, "white", "on_green")
     for char in guessWord:
         if char in target:
@@ -41,9 +40,20 @@ def compareWord(guessWord, target):
     return coloredString
             
 def guess():
+    global guesses
     print(str(guesses) + " guesses remaining.")
     currWord = getWord()
+    guesses = guesses - 1
     print(compareWord(currWord, targetWord))
 
+def main():
+    print("Welcome to CLI Wordle!")
+    while not won and guesses > 0:
+        guess()
+    if won:
+        print("You won in " + str(6-guesses) + " guess(es)!")
+        return
+    else:
+        print("You lost!")
 
 guess()
