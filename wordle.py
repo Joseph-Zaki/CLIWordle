@@ -1,5 +1,5 @@
 from colorama import init
-from termcolor import colored, cprint
+from termcolor import colored
 import random
 import csv
 init()
@@ -25,10 +25,11 @@ def getWord():
         return getWord()
     return input_word
 
-def compareWord(guessWord, target):
+def compareWord(inWord, target):
     coloredString = ""
     count = 0
     global won
+    guessWord = inWord.lower()
     if guessWord == target:
         won = True
         return colored(guessWord, "white", "on_green")
@@ -80,7 +81,7 @@ def main():
             main()
     else:
         print("You lost!")
-        print("word was " + targetWord)
+        print("Word was " + targetWord)
         if replay():
             main()
 
